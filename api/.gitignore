@@ -1,0 +1,28 @@
+# Logs
+logs
+*.log
+
+# Dependency directories
+node_modules/
+dist/
+
+# Environment variables
+.env
+
+# Build output
+build/
+dist/
+out/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+*.swn
+.DS_Store
+
+# Testing files
+coverage/
+.nyc_output/

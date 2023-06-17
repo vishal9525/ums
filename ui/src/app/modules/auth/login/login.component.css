@@ -1,0 +1,23 @@
+.login-page-image{
+    width:90%;
+}
+.login-form{
+    border-width: 2px;
+    border-color: white;
+    position: relative;
+    margin: auto;
+    width: 100%;
+    min-width: 320px;
+}
+.login-logo-image{
+    width: 150px;
+    margin-bottom: 30px;
+}
+.login-logo{
+    margin-top: 4rem;
+    text-align: center;
+}
+.login-text{
+    margin-bottom: 30px;
+    font-size: 20px;
+}

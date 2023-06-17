@@ -1,0 +1,207 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.form-layout {
+    width: 100%;
+}
+
+.ml-n-20 {
+    margin-left: -20px;
+}
+
+/* Sidebar css */
+.profile-card {
+    color: white;
+    background: linear-gradient(45deg, black, transparent);
+    margin-top: -8px;
+}
+
+.close-icon {
+    font-size: 14px;
+    text-align: right;
+    margin-top: -5px;
+}
+
+.hello {
+    padding-top: 10px;
+    font-size: 14px;
+    padding-left: 20%;
+}
+
+.hello-text {
+    margin-right: 71%;
+}
+
+.info-button {
+    opacity: 0.5;
+    font-size: 16px;
+}
+
+.close-icon-button {
+    margin-right: 0px;
+    font-size: 14px;
+    position: relative;
+    top: -2px;
+}
+
+.name {
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    padding-top: 5px;
+}
+
+.person-icon {
+    font-size: 20px;
+    padding-top: 3px;
+    margin-right: 2px;
+}
+
+.info {
+    text-align: right;
+    font-size: 12px;
+
+}
+
+.info-text {
+    cursor: pointer;
+}
+
+.setting-icon {
+    font-size: 14px;
+    padding-top: 3px;
+    cursor: pointer;
+}
+/* .list-item-active{
+     background: linear-gradient(to right, white, #673ab7) !important;
+}  */
+.list-item-active .mdc-list-item__primary-text {
+    color: purple!important;
+}
+.mdc-list-item__primary-text {
+    color: gray !important;
+}
+footer {
+    padding: 20px;
+    font-size: 12px;
+    background: #ffffff;
+}
+
+.custom-card {
+    width: 100%;
+    margin: 4px;
+    background: linear-gradient(to right, white, #673ab7) !important;
+}
+.clr-wht{
+    color: white !important;
+}
+.short-name {
+    border-radius: 50%;
+    background-color: #6038F2;
+    color: white;
+    display: inline-block;
+    width: 50px !important;
+    height: 50px !important;
+    line-height: 45px;
+    vertical-align: middle;
+    text-align: center;
+    margin-bottom: 0px !important;
+}
+
+.card-content {
+    font-size: 12px;
+    opacity: 0.8;
+    float: right;
+    margin-top: -6px;
+}
+
+.left-column {
+    background-color: #6038F2;
+    height: 100vh;
+}
+
+.txt-ctr {
+    font-size: 24px;
+    padding: 20px;
+    color: white;
+}
+
+.txt-gry {
+    color: gray;
+    opacity: 0.8;
+}
+
+.top-space {
+    margin-top: 50%;
+}
+
+.sec-text {
+    color: lightgray;
+    text-align: left;
+    width: 80%;
+    margin: auto;
+}
+
+.home-card {
+    width: 50%;
+    margin: auto;
+}
+
+.cust-head{
+    background: linear-gradient(to right, white, #673ab7) !important;
+    color: hwb(0 98% 2%) !important;
+}
+.cmn-bdy-cls{
+    width: 80%;
+    margin: auto;
+}
+.table-design{
+ position: relative;
+  min-height: 200px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.breadcrumb-col{
+    position: relative;
+    top: 10px;
+}
+.breadcrumb-arrow{
+    position: relative;
+    top: 7px;
+    margin: 10px;
+    color: purple;
+}
+.breadcrumb-item{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    opacity: 0.6;
+    cursor: default;
+}
+.breadcrub-active{
+    cursor: pointer;
+    color: purple;
+}
+
+@media only screen and (max-width: 767px) {
+    .top-space {
+        margin-top: 20%;
+    }
+    .left-column {
+        height: auto;
+    }
+    .home-card {
+        width: 90%;
+        margin: auto;
+    } 
+}

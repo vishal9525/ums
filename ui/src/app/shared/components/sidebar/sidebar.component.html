@@ -1,0 +1,41 @@
+<mat-nav-list>
+    <div class="profile-card">
+        <div class="hello"><span class="hello-text">Hello</span> </div>
+        <div class="name">
+            <mat-icon class="material-icons person-icon ">person_pin</mat-icon>{{user_name}}
+        </div>
+        <div class="info"><span class="info-text">view info</span>
+            <span routerLink="/">
+                <mat-icon class="material-icons-outlined setting-icon">settings</mat-icon>
+            </span>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <a mat-list-item routerLinkActive="list-item-active" [routerLinkActiveOptions]="{exact: true}"
+        routerLink="dashboard" (click)="onClose()">
+        <mat-icon class="material-icons-outlined">dashboard_customize</mat-icon>
+        Dashboard
+    </a>
+
+    <a mat-list-item routerLinkActive="list-item-active" *ngFor="let option of activeUserServices"
+        [routerLinkActiveOptions]="{exact: true}" routerLink="{{option.routerLink}}" (click)="onClose()">
+        <mat-icon class="material-icons-outlined">{{option.iconName}}</mat-icon>
+        {{option.name}}
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" (click)="onClose()" target="_blank"
+        [routerLink]="['/form','fb-test-form']">
+        <mat-icon class="material-icons-outlined">preview</mat-icon>
+        My Account
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" (click)="onClose()" routerLink="/login" (click)="logOut()">
+        <mat-icon class="material-icons-outlined">rocket_launch</mat-icon>
+        Logout
+    </a>
+<!-- 
+    <a mat-list-item routerLinkActive="list-item-active" *ngFor="let option of activeAdminService"
+        [routerLinkActiveOptions]="{exact: true}" routerLink="{{option.routerLink}}" (click)="onClose()">
+        <mat-icon class="material-icons-outlined">{{option.iconName}}</mat-icon>
+        {{option.name}}
+    </a> -->
+</mat-nav-list>

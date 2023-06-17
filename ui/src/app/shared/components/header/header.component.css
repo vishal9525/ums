@@ -1,0 +1,36 @@
+ul li {
+    list-style: none;
+    display: inline;
+  }
+  .spacer {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+  }
+  
+  .top {
+    margin-bottom: 10px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .app-title {
+    font-size: 25px;
+    font-family: monospace;
+  }
+  ul li.list-item-active {
+    background: #409bd2;
+    color: #fff;
+  }
+  .mat-toolbar.mat-primary {
+    background: #ffffff;
+    color: #000000;
+    margin-top: -30px;
+  }
+  .header-logo{
+    padding-top: 6px;
+    width:145px
+    }

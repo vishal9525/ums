@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-12 col-md-3 left-column">
+        <div class="txt-ctr  top-space">
+            <h1>A few clicks away from creating your company</h1>
+            <p class="fs-6 sec-text">Start your custom app in minutes and easily manage your services.</p>
+        </div>
+    </div>
+    <div class="col-12 col-md-9 right-column">
+        <div class="row">
+            <div class="col-12 col-md-9">
+                <div class="home-card">
+                    <div class="mt-5 ">
+                        <h2>Choose Your Service</h2>
+                        <p class="mt-4 txt-gry">
+                            Creating your service enables you to hassle-freely manage user subscriptions,
+                            empowering you to focus on delivering exceptional value and ensuring customer satisfaction.
+                        </p>
+                    </div>
+                    <mat-card class="custom-card mt-5">
+                        <mat-card-header>
+                            <div mat-card-avatar class="short-name">
+                                <mat-icon style="margin-top: 12px;">local_library</mat-icon>
+                            </div>
+                            <mat-card-title class="clr-wht">Register Your Library</mat-card-title>
+                            <mat-card-subtitle class="clr-wht">click on below arrow</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-actions align="end" style="margin-top:-20px;">
+                            <mat-icon [ngStyle]="{'color':'white'}" routerLink="onboarding" class="material-icons-outlined " style="cursor: pointer;">
+                                arrow_forward</mat-icon>
+                        </mat-card-actions>
+                    </mat-card>
+
+                    <mat-card class="custom-card mt-3">
+                        <mat-card-header>
+                            <div mat-card-avatar class="short-name">
+                                <mat-icon style="margin-top: 12px;">fitness_center</mat-icon>
+                            </div>
+                            <mat-card-title class="clr-wht">Register Your Gym</mat-card-title>
+                            <mat-card-subtitle class=" clr-wht">click on below arrow</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-actions align="end" style="margin-top:-20px;">
+                            <mat-icon [ngStyle]="{'color':'white'}" routerLink="onboarding" class="material-icons-outlined" style="cursor: pointer;">
+                                arrow_forward</mat-icon>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="txt-gry mt-4 text-center mb-5">
+                    <span>Already registered? <a routerLink="login" class="ml-2" style="color: #6038F2;" 
+                            type="button">Login Here</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

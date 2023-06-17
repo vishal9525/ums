@@ -1,0 +1,8 @@
+<div class="row">
+    <div class="col-10 breadcrumb-col">
+        <span *ngFor="let nav of navList; let i=index" >
+            <span class="breadcrumb-arrow"> <mat-icon class="material-icons-outlined" *ngIf="i!=0">arrow_forward_ios</mat-icon></span>
+            <a routerLink="{{nav.routerLink}}"class="breadcrumb-item" [ngClass]="nav.active?'breadcrub-active':''">{{nav.name}}</a>            
+        </span>
+    </div>
+</div>
