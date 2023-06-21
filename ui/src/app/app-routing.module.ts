@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'app/:appId', loadChildren: () => import('./modules/features/features.module').then(m => m.FeaturesModule) },
   { path: 'onboarding', loadChildren: () => import('./modules/onboarding/onboarding.module').then(m => m.OnBoardingModule) },
-  { path: 'user/:userId', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) },
+  { path: 'register/:appId', loadChildren: () => import('./modules/user-registration/user-registration.module').then(m => m.UserRegistrationModule) },
 ];;
 
 @NgModule({

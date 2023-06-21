@@ -2,6 +2,8 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { AdminServices } from 'src/app/core/services/admin.services';
+import { AuthService } from 'src/app/core/services/auth-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,49 +32,56 @@ export class DashboardComponent implements AfterViewInit {
     routerLink: '',
     active:false
   }] */
- FRUITS: any= [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
- NAMES: any= [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
+   names = [
+    'John Doe',
+    'Jane Smith',
+    'Michael Johnson',
+    'Emily Williams',
+    'Christopher Brown',
+    'Olivia Jones',
+    'Daniel Davis',
+    'Sophia Anderson',
+    'Matthew Wilson',
+    'Ava Martinez',
+    'William Taylor',
+    'Isabella Thomas',
+    'David Jackson',
+    'Mia White',
+    'Joseph Thompson',
+    'Charlotte Garcia',
+    'James Moore',
+    'Abigail Lee',
+    'Andrew Clark',
+    'Ella Rodriguez'
+  ];
+  
+   statuses = ['Active', 'Registered', 'Pending', 'Deactivated'];
+  
+   dataArray:any[] = [];
+
+  
+  displayedColumns: string[] = [ 'name',  'status','date'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
+  constructor(private authService: AuthService) {
+  for (let i = 0; i < 20; i++) {
+    const obj:any = {
+      name: this.names[Math.floor(Math.random() * this.names.length)],
+      status: this.statuses[Math.floor(Math.random() * this.statuses.length)],
+      date: new Date(Math.random() * (new Date().getTime() - 0) + 0).toISOString()
+    };
+    this.dataArray.push(obj);
+  }
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    this.dataSource = new MatTableDataSource(this.dataArray);
+    if (this.isMobileScreen()) {
+      this.displayedColumns=['name','date']
+      console.log('Mobile screen detected.');
+    }
   }
 
   ngAfterViewInit() {
@@ -88,22 +97,36 @@ export class DashboardComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  getShortName(name:any){
+    return this.authService.getShortName(name)
+  }
+  statusColor(stat: any){
+    let status = stat.toLowerCase();
+    let displayColor: any
+    switch (status) {
+      case 'active':
+        displayColor = 'status-green'
+        break;
+      case 'registered':
+        displayColor = 'status-gray'
+        break;
+        case 'deactivated':
+          displayColor = 'status-red'
+          break;
+          case 'pending':
+            displayColor = 'status-orange'
+            break;
+      default:
+        displayColor = ''
+        break;
+    }
+    return displayColor
+  }
+  isMobileScreen(): boolean {
+    const mobileScreenWidthThreshold = 768; 
+    return window.innerWidth < mobileScreenWidthThreshold;
+  }
 
-  /** Builds and returns a new User. */
-  createNewUser(id: number) {
-  const name =
-    this.NAMES[Math.round(Math.random() * (this.NAMES.length - 1))] +
-    ' ' +
-    this.NAMES[Math.round(Math.random() * (this.NAMES.length - 1))].charAt(0) +
-    '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: this.FRUITS[Math.round(Math.random() * (this.FRUITS.length - 1))],
-  };
-} 
 }
 
 

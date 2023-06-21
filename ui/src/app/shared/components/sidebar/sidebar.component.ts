@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.getUserDetails();
-    this.user_name='Vikram Singh'
+    this.user_name='Rahul Gaikwad'
     this.serviceOptions = this.adminService.getServices();
     this.activeAdminService = this.serviceOptions.adminServices.filter(
       (element: any) => element.show === true
@@ -56,8 +56,8 @@ export class SidebarComponent implements OnInit {
       (response) => {
         var userData: any = response;
         if (userData?.user_name) {
-          this.user_name = userData['user_name'];
-          localStorage.setItem('user_name', this.user_name);
+       /*    this.user_name = userData['user_name']; */
+     /*      localStorage.setItem('user_name', this.user_name); */
         } else {
        /*    this.toastr.error(
             'Failed to load the user Details.',
