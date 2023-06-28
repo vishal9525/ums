@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-onboarding-form',
   templateUrl: './onboarding-form.component.html',
@@ -7,21 +8,36 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class OnboardingFormComponent implements OnInit{
   onBoardingform: any =null ;
-  previewImage: string | undefined;
+  previewImage: any;
   imageUploaded:boolean=false;
-  logoName:string="Upload your Logo"
+  logoName:string=""
+  appUrl:string=''
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.createForm();
   }
-
+  removeImage(){
+  this.previewImage=null;
+  this.imageUploaded=false;
+  }
+  onLibraryInput(){
+    this.appUrl=this.separateWord(this.onBoardingform.get('libraryName').value)
+  }
+  separateWord(str:any) {
+    const lowerCaseString = str.toLowerCase();
+    const words = lowerCaseString.split(' ');
+    const singleWord = words.join('-');
+    return singleWord;
+  }
   onImageUpload(event: any) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.previewImage = `url(${e.target?.result})`;
+        let url= e.target?.result;
+        this.previewImage =url;
         this.imageUploaded=true;
         this.logoName=file.name
       };

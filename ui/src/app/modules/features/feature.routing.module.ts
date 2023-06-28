@@ -4,6 +4,8 @@ import { AddUserComponent } from "./admin-services/add-user/add-user.component";
 import { DashboardComponent } from "./admin-services/dashboard/dashboard.component";
 import { PaymentHistoryComponent } from "./admin-services/payment-history/payment-history.component";
 import { SubscriptionComponent } from "./admin-services/subscription/subscription.component";
+import { UserCardComponent } from "./admin-services/user-card/user-card.component";
+import { UserDetailsComponent } from "./admin-services/user-details/user-details.component";
 import { FeaturesComponent } from "./features.component";
 
 const routes: Routes = [
@@ -27,8 +29,18 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: "user-details",
+        component: UserDetailsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
         path: "subscription",
         component: SubscriptionComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "user-card",
+        component: UserCardComponent,
         canActivate: [AuthGuard],
       },
       {

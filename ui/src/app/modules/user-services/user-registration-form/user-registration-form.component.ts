@@ -4,19 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth-service';
 
 @Component({
-  selector: 'app-add-user',
-  templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  selector: 'app-user-registration-form',
+  templateUrl: './user-registration-form.component.html',
+  styleUrls: ['./user-registration-form.component.css']
 })
-export class AddUserComponent  implements OnInit {
-  breadcrumbs:any=[
-    {
-      id: 1,
-      name: 'Add User',
-      routerLink: '',
-      active:false
-    }
- ] 
+export class UserRegistrationFormComponent implements OnInit {
   appExist: boolean = false;
   appId: any = ''
 
@@ -35,12 +27,19 @@ export class AddUserComponent  implements OnInit {
   constructor(private authService: AuthService, private route: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.createForm();
     this.appId = this.route.snapshot.paramMap.get('appId');
+    this.route.queryParams.subscribe(params => {
+      const id = params['id']; 
+      console.log('Query parameter: ', id);
+      if(id){
+      this.initializeForm();
+      }
+    });
     let appArray = this.authService.getAppNameList()
     if (appArray && appArray.length > 0 && appArray.includes(this.appId)) {
       this.appExist = true
     }
-    this.createForm();
   }
   onImageUpload(event: any) {
     const file = event.target.files[0];
@@ -68,12 +67,23 @@ export class AddUserComponent  implements OnInit {
       fullName: ['', Validators.required],
       mobileNo: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       emailId: ['', [Validators.required, Validators.email]],
-      address: [''],
-      selectSub: [''],
-      joiningReason: [''],
-      dob: [''],
+      address: ['', Validators.required],
+      selectSub: ['', Validators.required],
+      joiningReason: ['', Validators.required],
+      dob: ['', Validators.required],
     });
   }
+initializeForm(){
+  this.registrationForm = this.fb.group({
+    fullName: ['Rahul Josh', Validators.required],
+    mobileNo: ['98456787656', [Validators.required, Validators.pattern(/^\d+$/)]],
+    emailId: ['xysge@gmail.com', [Validators.required, Validators.email]],
+    address: ['', Validators.required],
+    selectSub: ['', Validators.required],
+    joiningReason: ['', Validators.required],
+    dob: ['', Validators.required],
+  });
+}
 
   onSubmit() {
     /*     if (this.form.valid) {
@@ -81,4 +91,3 @@ export class AddUserComponent  implements OnInit {
         } */
   }
 }
-

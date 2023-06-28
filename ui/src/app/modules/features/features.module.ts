@@ -6,6 +6,8 @@ import { DashboardComponent } from './admin-services/dashboard/dashboard.compone
 import { AddUserComponent } from './admin-services/add-user/add-user.component';
 import { PaymentHistoryComponent } from './admin-services/payment-history/payment-history.component';
 import { SubscriptionComponent } from './admin-services/subscription/subscription.component';
+import { UserDetailsComponent } from './admin-services/user-details/user-details.component';
+import { UserCardComponent } from './admin-services/user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { SubscriptionComponent } from './admin-services/subscription/subscriptio
     DashboardComponent,
     AddUserComponent,
     PaymentHistoryComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    UserDetailsComponent,
+    UserCardComponent
   ],
   imports: [
     SharedModule,

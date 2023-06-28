@@ -46,6 +46,7 @@ export class SidebarComponent implements OnInit {
   }
   logOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('appName');
     localStorage.removeItem('user_id');
     localStorage.removeItem('role');
     localStorage.removeItem('user_name');

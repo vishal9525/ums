@@ -1,11 +1,11 @@
-<app-breadcrumbs-nav [navList]="breadcrumbs"></app-breadcrumbs-nav>
-<div class="container">
+<div class="container" *ngIf="appExist">
     <div class="row">
       <div class="col-12 col-md-8 offset-md-2">
         <mat-card class="form-layout text-center">
           <div class="text-center mt-4">
-            <img src="assets/images/register.png" alt="onboarding" style="width: 100px; height: 70px; border-radius: 50%;">
+            <img src="assets/images/register.png" alt="onboarding" style="width: 150px; height: 100px; border-radius: 50%;">
           </div>
+          <div class="text-center fs-3 m-3">Registration Form</div>
           <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
             <div class="row m-2">
               <div class="col-12 col-md-6">
@@ -100,7 +100,6 @@
                   
                 
               </div>   
-              <div>Note: You can enter only name, mobile no and email and click on submit to send form to user.</div>
               <button class="w-100 mb-3 mt-2" mat-fab extended color="primary" type="submit">Submit</button>
             </div>
           </form>

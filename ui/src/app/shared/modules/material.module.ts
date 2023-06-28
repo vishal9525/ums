@@ -50,6 +50,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatRadioModule,
     MatSlideToggleModule,
     MatDialogModule,
+    MatSelectModule
   ],
   exports: [
     MatInputModule,
@@ -76,6 +77,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatRadioModule,
     MatSlideToggleModule,
     MatDialogModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

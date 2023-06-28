@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth-service';
 
 @Component({
   selector: 'app-breadcrumbs-nav',
@@ -6,7 +7,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./breadcrumbs-nav.component.css']
 })
 export class BreadcrumbsNavComponent {
-@Input() navList:any
+  appName:string=''
+  constructor(private authService: AuthService){
+   this.appName=this.authService.getAppName();
+  }
+  @Input() navList:any
 
 
 }

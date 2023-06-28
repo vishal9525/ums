@@ -1,1 +1,46 @@
-<p>subscription works!</p>
+<app-breadcrumbs-nav [navList]="breadcrumbs"></app-breadcrumbs-nav>
+<div class="row cmn-bdy-cls mt-4">
+      <div class="mat-elevation">
+        <div class="table-design">
+          <div class="search-input">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><mat-icon>search</mat-icon></span>
+              </div>
+              <input type="text" class="form-control" (keyup)="applyFilter($event)" placeholder="search" #input aria-label="Search" aria-describedby="basic-addon1">
+            </div>
+          </div>
+        
+            <table mat-table [dataSource]="dataSource" matSort >
+             
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                  <td mat-cell *matCellDef="let row"> <span class=" short-name">
+                    <span class="short-name-font">{{getShortName(row?.name)}}</span></span>
+                    <span class="short-name-gap">{{row?.name}} </span> 
+                   <div *ngIf="isMobileScreen()" class="status-column">
+                    <span  >{{row.endDate | date}}</span></div>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="endDate" >
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+                  <td mat-cell *matCellDef="let row"> <span >{{row?.endDate | date}}</span></td>
+                </ng-container>
+
+                <ng-container matColumnDef="remainingDays">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header><span class="date-width">Remaining Days</span>  </th>
+                  <td mat-cell *matCellDef="let row"  class="status-font-style" [ngClass]="statusColor(row?.remainingDays)"> {{row?.remainingDays}} <span class="arrow-to-next" routerLink="/{{appName}}/user-card"> <mat-icon class="material-icons-outlined arrow-next">arrow_forward_ios</mat-icon></span> </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns ; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            
+              </table>
+        </div>
+       
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+      
+      
+</div>

@@ -36,6 +36,10 @@ export class AuthService {
     return this.http.post(`${this.API}/userDetails/login`, user);
   } */
 
+  getAppName(){
+    let appName:any=localStorage.getItem("appName");
+    return appName;
+  }
   saveUserData(user: any) {
     return this.http.post(`${this.API}/userDetails/createUser`, user);
   }
@@ -54,6 +58,10 @@ export class AuthService {
       `https://run.mocky.io/v3/eb3807da-a739-4713-ad9e-078a8ffe4215`
     );
   }
+  getAppNameList(){
+   let appNameArray=['my-app','my-library','awsome-library','gold-gym']
+   return appNameArray;
+   }
 
   getUserDetails() {
     return this.http.get(

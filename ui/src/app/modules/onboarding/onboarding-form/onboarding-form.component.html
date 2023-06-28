@@ -1,111 +1,127 @@
-<div class="row">
-  <div class="col-12 col-md-8 offset-md-2">
-    <mat-card class="form-layout text-center">
-      <div class="text-center mt-4">
-        <img src="assets/images/onboarding.png" alt="onboarding" style="width: 100px;">
-      </div>
-      <div class="text-center fs-3 m-3">Onboarding Form</div>
-      <form [formGroup]="onBoardingform" (ngSubmit)="onSubmit()">
-        <div class="row m-2">
-          <div class="col-12 col-md-6 mb-2 ">
-            <mat-form-field class="w-100" appearance="outline">
-              <mat-label>Owner Name</mat-label>
-              <input matInput formControlName="ownerName">
-              <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerName')?.invalid && onBoardingform.get('ownerName')?.touched">
-                Owner Name is required
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-        
-          <div class="col-12 col-md-6">
-            <mat-form-field class="w-100" appearance="outline">
-              <mat-label>Owner Contact No</mat-label>
-              <input matInput formControlName="ownerContactNo">
-              <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerContactNo')?.invalid && onBoardingform.get('ownerContactNo')?.touched">
-                Owner Contact No is required
-              </mat-error>
-            </mat-form-field>
-          </div>
-          
-          <div class="col-12 col-md-6 mb-2">
-            <mat-form-field class="w-100" appearance="outline"> 
-              <mat-label>Owner Email ID</mat-label>
-              <input matInput formControlName="ownerEmail">
-              <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerEmail')?.invalid && onBoardingform.get('ownerEmail')?.touched">
-                Invalid Email ID
-              </mat-error>
-            </mat-form-field>
-          </div>
-       
-
-          <div class="col-12 col-md-6 mb-2">
-            <mat-form-field class="w-100 " appearance="outline">
-              <mat-label>Library Name</mat-label>
-              <input matInput formControlName="libraryName">
-              <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryName')?.invalid && onBoardingform.get('libraryName')?.touched">
-                Library Name is required
-              </mat-error>
-            </mat-form-field>
-          </div>
-  
-
-           <div class="col-12 col-md-6 mb-2">
-            <mat-form-field class="w-100 " appearance="outline">
-              <mat-label>Library Contact No</mat-label>
-              <input matInput formControlName="libraryContactNo">
-              <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryContactNo')?.invalid && onBoardingform.get('libraryContactNo')?.touched">
-                Library Contact No is required
-              </mat-error>
-            </mat-form-field>
-           </div>
-       
-        
-          <div class="col-12 col-md-6 mb-2">
-            <mat-form-field class="w-100 " appearance="outline">
-              <mat-label>Library Email ID</mat-label>
-              <input matInput formControlName="libraryEmail">
-              <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryEmail')?.invalid && onBoardingform.get('libraryEmail')?.touched">
-                Invalid Email ID
-              </mat-error>
-            </mat-form-field>
-          </div>
-   
-
-
-          <div class="col-12 col-md-6 mb-2">
-            <mat-form-field class="w-100 " appearance="outline">
-              <mat-label>Library Student Capacity</mat-label>
-              <input matInput formControlName="libraryStudentCapacity">
-              <mat-error class="ml-n-20"  *ngIf="onBoardingform.get('libraryStudentCapacity')?.invalid && onBoardingform.get('libraryStudentCapacity')?.touched">
-                Invalid Student Capacity
-              </mat-error>
-            </mat-form-field>
-          </div>
-     
-          <div class="col-12 col-md-6 mb-2">
-            <mat-form-field class="w-100 " appearance="outline">
-              <mat-label>Library Address</mat-label>
-              <input matInput formControlName="libraryAddress">
-              <mat-error  class="ml-n-20" *ngIf="onBoardingform.get('libraryAddress')?.invalid && onBoardingform.get('libraryAddress')?.touched">
-                Library Address is required
-              </mat-error>
-            </mat-form-field>
-          </div>        
-          <div class="col-12 col-md-6 mb-2 ">
-              <input type="file" #logo accept="image/*" hidden (change)="onImageUpload($event)">
-              <button mat-fab color="primary" class="upload-button" (click)="logo.click()">
-                <mat-icon>cloud_upload</mat-icon>
-              </button>
-              <span class="icon-text">{{logoName}}</span>
-            </div>
-            <div class="col-12 col-md-6 mb-2 ">
-              <div class="image-preview text-center" *ngIf="imageUploaded" [style.backgroundImage]="previewImage"></div>
-            </div>
-          <button class="w-100 mb-3" mat-fab extended color="primary" type="submit">Submit</button>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-8 offset-md-2">
+      <mat-card class="form-layout text-center">
+        <div class="text-center mt-4">
+          <img src="assets/images/onboarding.png" alt="onboarding" style="width: 100px;">
         </div>
-      </form>
-    </mat-card>
+        <div class="text-center fs-3 m-3">Onboarding Form</div>
+        <form [formGroup]="onBoardingform" (ngSubmit)="onSubmit()">
+          <div class="row m-2">
+            <div class="col-12 col-md-6">
+              <mat-form-field class="w-100 " >
+                <mat-label>Library Name</mat-label>
+                <input matInput formControlName="libraryName" (input)="onLibraryInput()">
+                <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryName')?.invalid && onBoardingform.get('libraryName')?.touched">
+                  Library Name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6" style="margin-top:-6px;">
+              <label for="basic-url" class="fl font-12">Your App Url</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text font-12" id="basic-addon3">https://global-ums.web.app/</span>
+                </div>
+                <input type="text" class="form-control font-12" id="basic-url" [value]="appUrl" aria-describedby="basic-addon3">
+              </div>
+            </div>
+  
+            <div class="col-12 col-md-6  ">
+              <mat-form-field class="w-100" >
+                <mat-label>Owner Name</mat-label>
+                <input matInput formControlName="ownerName">
+                <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerName')?.invalid && onBoardingform.get('ownerName')?.touched">
+                  Owner Name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+  
+          
+            <div class="col-12 col-md-6">
+              <mat-form-field class="w-100" >
+                <mat-label>Owner Contact No</mat-label>
+                <input matInput formControlName="ownerContactNo">
+                <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerContactNo')?.invalid && onBoardingform.get('ownerContactNo')?.touched">
+                  Owner Contact No is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            
+            <div class="col-12 col-md-6 ">
+              <mat-form-field class="w-100" > 
+                <mat-label>Owner Email ID</mat-label>
+                <input matInput formControlName="ownerEmail">
+                <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerEmail')?.invalid && onBoardingform.get('ownerEmail')?.touched">
+                  Invalid Email ID
+                </mat-error>
+              </mat-form-field>
+            </div>
+  
+             <div class="col-12 col-md-6">
+              <mat-form-field class="w-100 " >
+                <mat-label>Library Contact No</mat-label>
+                <input matInput formControlName="libraryContactNo">
+                <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryContactNo')?.invalid && onBoardingform.get('libraryContactNo')?.touched">
+                  Library Contact No is required
+                </mat-error>
+              </mat-form-field>
+             </div>
+         
+          
+            <div class="col-12 col-md-6 ">
+              <mat-form-field class="w-100 ">
+                <mat-label>Library Email ID</mat-label>
+                <input matInput formControlName="libraryEmail">
+                <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryEmail')?.invalid && onBoardingform.get('libraryEmail')?.touched">
+                  Invalid Email ID
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 col-md-6 ">
+              <mat-form-field class="w-100 " >
+                <mat-label>Library Student Capacity</mat-label>
+                <input matInput formControlName="libraryStudentCapacity">
+                <mat-error class="ml-n-20"  *ngIf="onBoardingform.get('libraryStudentCapacity')?.invalid && onBoardingform.get('libraryStudentCapacity')?.touched">
+                  Invalid Student Capacity
+                </mat-error>
+              </mat-form-field>
+            </div>
+       
+            <div class="col-12 col-md-6">
+              <mat-form-field class="w-100 " >
+                <mat-label>Library Address</mat-label>
+                <input matInput formControlName="libraryAddress">
+                <mat-error  class="ml-n-20" *ngIf="onBoardingform.get('libraryAddress')?.invalid && onBoardingform.get('libraryAddress')?.touched">
+                  Library Address is required
+                </mat-error>
+              </mat-form-field>
+            </div>  
+            <div class="col-12 col-md-6">
+              <div style="text-align: left;" *ngIf="!imageUploaded" >
+                <input type="file" #logo accept="image/*" hidden (change)="onImageUpload($event)">
+                <button  class="upload-button"  type="button" mat-icon-button (click)="logo.click()">
+                  <mat-icon>cloud_upload</mat-icon>
+                </button>
+                <span class="icon-text">Upload your logo</span>
+              </div>
+              <div  *ngIf="imageUploaded" >
+                <div class="image-preview "  style="margin: auto;">
+                  <img [src]="previewImage" alt="Preview Image">
+                </div>
+                <span class="img-clear"><mat-icon (click)="removeImage()"> clear</mat-icon></span>
+                <div style="margin-top: -25px;">{{logoName}}</div>
+              </div>
+                
+              
+            </div>   
+            <button class="w-100 mb-3 mt-2" mat-fab extended color="primary" type="submit">Submit</button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
   </div>
+ 
 </div>
 

@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 import { AdminServices } from 'src/app/core/services/admin.services';
 import { AuthService } from 'src/app/core/services/auth-service';
 
@@ -13,25 +14,11 @@ import { AuthService } from 'src/app/core/services/auth-service';
 export class DashboardComponent implements AfterViewInit {
   breadcrumbs:any=[
     {
-      id: 1,
       name: 'Dashboard',
       routerLink: '',
       active:false
     }
  ] 
-/*  breadcrumbs:any=[
-  {
-    id: 1,
-    name: 'Dashboard',
-    routerLink: '',
-    active:true
-  },
-  {
-    id: 2,
-    name: 'Edit',
-    routerLink: '',
-    active:false
-  }] */
    names = [
     'John Doe',
     'Jane Smith',
@@ -62,11 +49,12 @@ export class DashboardComponent implements AfterViewInit {
   
   displayedColumns: string[] = [ 'name',  'status','date'];
   dataSource: MatTableDataSource<any>;
-
+  appName:string='';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,private route: ActivatedRoute) {
+    this.appName = this.authService.getAppName();
   for (let i = 0; i < 20; i++) {
     const obj:any = {
       name: this.names[Math.floor(Math.random() * this.names.length)],

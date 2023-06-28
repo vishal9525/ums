@@ -7,7 +7,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { FeaturesModule } from './modules/features/features.module';
 import { HomeModule } from './modules/home/home.module';
 import { OnBoardingModule } from './modules/onboarding/onboarding.module';
-import { UserRegistrationModule } from './modules/user-registration/user-registration.module';
+import { UserServiceModule } from './modules/user-services/user-services.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -24,7 +24,7 @@ import { AuthInterceptor } from './core/interceptors/interceptors/http-intercept
     AuthModule,
     OnBoardingModule,
     FeaturesModule,
-    UserRegistrationModule,
+    UserServiceModule,
     HomeModule,
     BrowserAnimationsModule,
     SharedModule
