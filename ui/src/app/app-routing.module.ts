@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthService } from './core/services/auth-service';
 import { LoginComponent } from './modules/auth/login/login.component';
 import { HomeComponent } from './modules/home/home/home.component';
+import { PaymentComponent } from './shared/components/payment/payment.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: '', loadChildren: () => import('./modules/features/features.module').then(m => m.FeaturesModule) },
   { path: 'onboarding', loadChildren: () => import('./modules/onboarding/onboarding.module').then(m => m.OnBoardingModule) },
   { path: 'user', loadChildren: () => import('./modules/user-services/user-services.module').then(m => m.UserServiceModule) },
+  { path: 'payment', component: PaymentComponent },
 ];;
 
 @NgModule({

@@ -12,6 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptor } from './core/interceptors/interceptors/http-interceptor';
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -22,6 +25,8 @@ import { AuthInterceptor } from './core/interceptors/interceptors/http-intercept
     BrowserModule,
     AppRoutingModule,
     AuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
     OnBoardingModule,
     FeaturesModule,
     UserServiceModule,

@@ -9,7 +9,7 @@ import { AuthService } from "src/app/core/services/auth-service";
   styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
-  emailFormControl = new FormControl("", [Validators.required]);
+  usernameFormControl = new FormControl("", [Validators.required]);
   passwordFormControl = new FormControl("", [Validators.required]);
   constructor(
     private router: Router,
@@ -25,10 +25,12 @@ export class LoginComponent implements OnInit {
 
     this.authService
       .authenticateUser(
-        this.emailFormControl.value,
+        this.usernameFormControl.value,
         this.passwordFormControl.value
       ).subscribe(response => {
           var authData: any = response;
+          console.log(authData)
+          return
           if (authData["status"] === "success") {
             localStorage.setItem("user_id", authData["user_id"]);
             localStorage.setItem("token", authData["token"]);

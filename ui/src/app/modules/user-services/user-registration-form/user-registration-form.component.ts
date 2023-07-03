@@ -74,14 +74,10 @@ export class UserRegistrationFormComponent implements OnInit {
     });
   }
 initializeForm(){
-  this.registrationForm = this.fb.group({
-    fullName: ['Rahul Josh', Validators.required],
-    mobileNo: ['98456787656', [Validators.required, Validators.pattern(/^\d+$/)]],
-    emailId: ['xysge@gmail.com', [Validators.required, Validators.email]],
-    address: ['', Validators.required],
-    selectSub: ['', Validators.required],
-    joiningReason: ['', Validators.required],
-    dob: ['', Validators.required],
+  this.registrationForm.patchValue({
+    fullName: 'John Doe',
+    emailId: 'johndoe@example.com',
+    mobileNo: '43485693445'
   });
 }
 

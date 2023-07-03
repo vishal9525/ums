@@ -13,25 +13,22 @@
                         <div class="login-text"> Log in to your account </div>
                     </span>
                     <mat-form-field class="w-100 mt-2" appearance="fill">
-                        <mat-label>Email Id</mat-label>
-                        <input matInput [formControl]="emailFormControl" placeholder="Ex. abc@example.com">
-                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                            Please enter valid email address
-                        </mat-error>
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                            Email ID is <strong>required</strong>
+                        <mat-label>Username</mat-label>
+                        <input matInput [formControl]="usernameFormControl" placeholder="my-app">
+                        <mat-error *ngIf="usernameFormControl.hasError('required')">
+                            Username is <strong>required</strong>
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="w-100 mt-4" appearance="fill">
                         <mat-label>Password</mat-label>
                         <input type="password" matInput [formControl]="passwordFormControl"
                             placeholder="Enter strong password">
-                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                        <mat-error *ngIf="passwordFormControl.hasError('required')">
                             Password is <strong>required</strong>
                         </mat-error>
                     </mat-form-field>
                     <button mat-fab extended color="primary" style="height: 48px;" class="mt-4 w-100"
-                        [disabled]="emailFormControl.hasError('required') || passwordFormControl.hasError('required')"
+                        [disabled]="usernameFormControl.hasError('required') || passwordFormControl.hasError('required')"
                         (click)="onSubmit()">
                         Submit
                     </button>

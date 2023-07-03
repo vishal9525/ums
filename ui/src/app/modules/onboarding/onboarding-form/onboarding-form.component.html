@@ -3,9 +3,9 @@
     <div class="col-12 col-md-8 offset-md-2">
       <mat-card class="form-layout text-center">
         <div class="text-center mt-4">
-          <img src="assets/images/onboarding.png" alt="onboarding" style="width: 100px;">
+          <img src="assets/images/logo.png" alt="onboarding" style="width: 150px;">
         </div>
-        <div class="text-center fs-3 m-3">Onboarding Form</div>
+        <div class="text-center fs-3 m-3 mt-4">Onboarding Form</div>
         <form [formGroup]="onBoardingform" (ngSubmit)="onSubmit()">
           <div class="row m-2">
             <div class="col-12 col-md-6">
@@ -99,9 +99,18 @@
               </mat-form-field>
             </div>  
             <div class="col-12 col-md-6">
+              <mat-form-field class="w-100 " >
+                <mat-label>Your UPI Id</mat-label>
+                <input matInput formControlName="upiId">
+                <mat-error  class="ml-n-20" *ngIf="onBoardingform.get('upiId')?.invalid && onBoardingform.get('upiId')?.touched">
+                 upi id is required
+                </mat-error>
+              </mat-form-field>
+            </div>  
+            <div class="col-12 col-md-6">
               <div style="text-align: left;" *ngIf="!imageUploaded" >
                 <input type="file" #logo accept="image/*" hidden (change)="onImageUpload($event)">
-                <button  class="upload-button"  type="button" mat-icon-button (click)="logo.click()">
+                <button  class="upload-button"  [disabled]="appName==''" type="button" mat-icon-button (click)="logo.click()">
                   <mat-icon>cloud_upload</mat-icon>
                 </button>
                 <span class="icon-text">Upload your logo</span>
@@ -113,9 +122,24 @@
                 <span class="img-clear"><mat-icon (click)="removeImage()"> clear</mat-icon></span>
                 <div style="margin-top: -25px;">{{logoName}}</div>
               </div>
-                
-              
             </div>   
+            <div class="col-12 col-md-6">
+              <div style="text-align: left;" *ngIf="!qrUploaded" >
+                <input type="file" #qrcode accept="image/*" hidden (change)="onQrload($event)">
+                <button  class="upload-button" [disabled]="appName==''" type="button" mat-icon-button (click)="qrcode.click()">
+                  <mat-icon>cloud_upload</mat-icon>
+                </button>
+                <span class="icon-text">Upload your Qr Code</span>
+              </div>
+              <div  *ngIf="qrUploaded" >
+                <div class="image-preview "  style="margin: auto;">
+                  <img [src]="previewQrCode" alt="Preview Image">
+                </div>
+                <span class="img-clear"><mat-icon (click)="removeQr()"> clear</mat-icon></span>
+                <div style="margin-top: -25px;">{{qrcodeName}}</div>
+              </div>
+            </div> 
+
             <button class="w-100 mb-3 mt-2" mat-fab extended color="primary" type="submit">Submit</button>
           </div>
         </form>

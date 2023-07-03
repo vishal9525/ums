@@ -1,11 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
 const app = express();
+const db= require("../config/database");
+var cors = require('cors');
+
+const Admin = require('./models/admin.model')(db.sequelize, db.Sequelize);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(cors());
+app.options('*',cors());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -19,31 +23,37 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("/api/posts", (req, res, next) => {
-  const post = req.body;
-  console.log(post);
-  res.status(201).json({
-    message: 'Post added successfully'
-  });
-});
+ async function createTable() {
+  try {
+    await db.sequelize.authenticate();
+    await Admin.sync({ force: true });
+    console.log('Table created successfully.');
+  } catch (error) {
+    console.error('Error creating table:', error);
+  } finally {
+    await db.sequelize.close();
+  }
+}
 
-app.get("/api/posts", (req, res, next) => {
-  const posts = [
-    {
-      id: "xyz",
-      title: "First server-side post",
-      content: "This is coming from the server"
-    },
-    {
-      id: "ksajflaj132",
-      title: "Second server-side post",
-      content: "This is coming from the server!"
+//createTable(); 
+
+
+let adminRouter = require('./routes/admin.router');
+let authRouter = require('./routes/auth.router')
+
+console.log('--api started--');
+
+app.use('/admin', adminRouter);
+app.use('/auth', authRouter);
+
+app.use((error,req,res,next)=>{
+  res.status(error).send({
+    error:{
+      status:error.status ||500,
+      message: error.message || 'Internal Server Error'
     }
-  ];
-  res.status(200).json({
-    message: "Posts fetched successfully!",
-    posts: posts
-  });
-});
+  })
+  console.log("Error in app.js---",error)
+})
 
 module.exports = app;

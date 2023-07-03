@@ -25,10 +25,11 @@ export class SidebarComponent implements OnInit {
     this.activeAdminService = this.serviceOptions.adminServices.filter(
       (element: any) => element.show === true
     );
-    this.activeUserServices = this.serviceOptions.userServices.filter(
+    this.activeUserServices = this.serviceOptions.userServices;
+  /*   this.activeUserServices = this.serviceOptions.userServices.filter(
       (element: any) => element.show === true
-    );
-    this.adminService.getOptionsStatusListener().subscribe((resp) => {
+    ); */
+  /*   this.adminService.getOptionsStatusListener().subscribe((resp) => {
       this.serviceOptions = resp;
       this.activeAdminService = this.serviceOptions.adminServices.filter(
         (element: any) => element.show === true
@@ -36,7 +37,7 @@ export class SidebarComponent implements OnInit {
       this.activeUserServices = this.serviceOptions.userServices.filter(
         (element: any) => element.show === true
       );
-    });
+    }); */
   }
   onClose() {
     if (window.innerWidth > 680) {

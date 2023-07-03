@@ -9,6 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { BreadcrumbsNavComponent } from './components/breadcrumbs-nav/breadcrumbs-nav.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { BreadcrumbsNavComponent } from './components/breadcrumbs-nav/breadcrumb
        FooterComponent,
        SidebarComponent,
        DialogComponent,
-       BreadcrumbsNavComponent
+       BreadcrumbsNavComponent,
+       PaymentComponent
   ],
   imports: [
     CommonModule,

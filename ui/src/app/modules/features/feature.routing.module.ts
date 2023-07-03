@@ -42,11 +42,6 @@ const routes: Routes = [
         path: "user-card",
         component: UserCardComponent,
         canActivate: [AuthGuard],
-      },
-      {
-        path: "payment-history",
-        component: PaymentHistoryComponent,
-        canActivate: [AuthGuard],
       }
     ]
   },

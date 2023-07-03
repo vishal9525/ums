@@ -18,12 +18,12 @@
         Dashboard
     </a>
 
-    <a mat-list-item routerLinkActive="list-item-active" *ngFor="let option of activeUserServices"
+    <a mat-list-item routerLinkActive="list-item-active" [ngClass]="{'notActiveNav':!option.show}" *ngFor="let option of activeUserServices"
         [routerLinkActiveOptions]="{exact: true}" routerLink="{{option.routerLink}}" (click)="onClose()">
         <mat-icon class="material-icons-outlined">{{option.iconName}}</mat-icon>
         {{option.name}}
     </a>
-    <a mat-list-item routerLinkActive="list-item-active" (click)="onClose()" target="_blank"
+    <a mat-list-item routerLinkActive="list-item-active" (click)="onClose()" target="_blank" class="notActiveNav"
         [routerLink]="['/form','fb-test-form']">
         <mat-icon class="material-icons-outlined">preview</mat-icon>
         My Account

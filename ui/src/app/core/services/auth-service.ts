@@ -49,14 +49,12 @@ export class AuthService {
       responseType: "text",
     });
   }
-  authenticateUser(email: any, password: any) {
+  authenticateUser(username: any, password: any) {
     let user = {
-      email: email,
+      userName: username,
       password: password,
     };
-    return this.http.get(
-      `https://run.mocky.io/v3/eb3807da-a739-4713-ad9e-078a8ffe4215`
-    );
+    return this.http.post('http://localhost:3000/auth/login',user)
   }
   getAppNameList(){
    let appNameArray=['my-app','my-library','awsome-library','gold-gym']

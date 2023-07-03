@@ -411,7 +411,12 @@ font-weight: 800;
     top: -130px;
     left: -50px;
 }
-
+.notActiveNav{
+    cursor: not-allowed !important;
+    filter: opacity(0.3) !important;
+    pointer-events: none !important;
+   
+}
 @media only screen and (max-width: 767px) {
     .top-space {
         margin-top: 20%;

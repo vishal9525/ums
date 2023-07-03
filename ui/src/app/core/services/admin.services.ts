@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 @Injectable({
@@ -5,6 +6,8 @@ import { Subject } from 'rxjs';
 })
 export class AdminServices {
   optionsStatusListener = new Subject<any>();
+
+  constructor(private http:HttpClient){}
   serviceoptions = {
     userServices: [
       {
@@ -16,7 +19,7 @@ export class AdminServices {
       },
       {
         id: 2,
-        show: true,
+        show: false,
         name: 'Reserve Seat',
         iconName: 'developer_board',
         routerLink: 'create-advance-form',
@@ -30,21 +33,21 @@ export class AdminServices {
       },
       {
         id: 4,
-        show: true,
+        show: false,
         name: 'Expense Management',
         iconName: 'contact_page',
         routerLink: 'leave',
       },
       {
         id: 5,
-        show: true,
+        show: false,
         name: 'Payment History',
         iconName: 'price_change',
         routerLink: 'payment-history',
       },
       {
         id: 6,
-        show: true,
+        show: false,
         name: 'Feedback',
         iconName: 'help_outline',
         routerLink: 'helpdesk',
@@ -76,5 +79,8 @@ export class AdminServices {
   }
   getOptionsStatusListener() {
     return this.optionsStatusListener.asObservable();
+  }
+  createAdmin(req:any){
+    return this.http.post('http://localhost:3000/admin',req)
   }
 }
