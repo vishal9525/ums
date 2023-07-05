@@ -2,7 +2,7 @@
     <mat-toolbar-row>
          <button style="color: black;" mat-icon-button class=" d-sm-none" (click)="onToggleSidenav()"><mat-icon class="pl-2">menu</mat-icon></button> 
       <span class="spacer d-sm-none"></span>
-        <a> <img src="assets/images/logo.png" class="header-logo" /></a>
+        <a> <img [src]="userDetails?.logo" class="header-logo" /></a>
         <span class="spacer"></span>
         <span class="app-title d-none d-md-block">User Management Service</span>
 

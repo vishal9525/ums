@@ -8,6 +8,7 @@ import { PaymentHistoryComponent } from './admin-services/payment-history/paymen
 import { SubscriptionComponent } from './admin-services/subscription/subscription.component';
 import { UserDetailsComponent } from './admin-services/user-details/user-details.component';
 import { UserCardComponent } from './admin-services/user-card/user-card.component';
+import { AdminDetailsComponent } from './admin-services/admin-details/admin-details.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { UserCardComponent } from './admin-services/user-card/user-card.componen
     PaymentHistoryComponent,
     SubscriptionComponent,
     UserDetailsComponent,
-    UserCardComponent
+    UserCardComponent,
+    AdminDetailsComponent
   ],
   imports: [
     SharedModule,

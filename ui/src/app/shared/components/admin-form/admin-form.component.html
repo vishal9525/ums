@@ -1,0 +1,154 @@
+<div class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 offset-md-2">
+        <mat-card class="form-layout text-center">
+           <div class="text-center mt-4" *ngIf="formDetails?.showIcon"> 
+            <img src="assets/images/logo.png" alt="onboarding" style="width: 150px;">
+          </div> 
+           <div class="text-center fs-4 m-3 mt-4">{{formDetails?.title}}<span>
+            <button class="user-edit-btn" mat-button color="primary"  *ngIf="formDetails?.showEditButton"><mat-icon>edit</mat-icon>Edit</button>
+           </span></div> 
+          <form [formGroup]="onBoardingform" (ngSubmit)="onSubmit()">
+            <div class="row m-2">
+              <div class="col-12 col-md-6">
+                <mat-form-field class="w-100 " >
+                  <mat-label>Library Name</mat-label>
+                  <input matInput formControlName="libraryName" (input)="onLibraryInput()">
+                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryName')?.invalid && onBoardingform.get('libraryName')?.touched">
+                    Library Name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-md-6" style="margin-top:-6px;">
+                <label for="basic-url" class="fl font-12">Your App Url</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text font-12" id="basic-addon3">https://global-ums.web.app/</span>
+                  </div>
+                  <input type="text" [disabled]="formDetails?.showEditButton" class="form-control font-12" id="basic-url" [value]="appUrl" aria-describedby="basic-addon3">
+                </div>
+              </div>
+    
+              <div class="col-12 col-md-6  ">
+                <mat-form-field class="w-100" >
+                  <mat-label>Owner Name</mat-label>
+                  <input matInput formControlName="ownerName">
+                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerName')?.invalid && onBoardingform.get('ownerName')?.touched">
+                    Owner Name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+    
+            
+              <div class="col-12 col-md-6">
+                <mat-form-field class="w-100" >
+                  <mat-label>Owner Contact No</mat-label>
+                  <input matInput formControlName="ownerContactNo">
+                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerContactNo')?.invalid && onBoardingform.get('ownerContactNo')?.touched">
+                    Owner Contact No is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div class="col-12 col-md-6 ">
+                <mat-form-field class="w-100" > 
+                  <mat-label>Owner Email ID</mat-label>
+                  <input matInput formControlName="ownerEmail">
+                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerEmail')?.invalid && onBoardingform.get('ownerEmail')?.touched">
+                    Invalid Email ID
+                  </mat-error>
+                </mat-form-field>
+              </div>
+    
+               <div class="col-12 col-md-6">
+                <mat-form-field class="w-100 " >
+                  <mat-label>Library Contact No</mat-label>
+                  <input matInput formControlName="libraryContactNo">
+                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryContactNo')?.invalid && onBoardingform.get('libraryContactNo')?.touched">
+                    Library Contact No is required
+                  </mat-error>
+                </mat-form-field>
+               </div>
+           
+            
+              <div class="col-12 col-md-6 ">
+                <mat-form-field class="w-100 ">
+                  <mat-label>Library Email ID</mat-label>
+                  <input matInput formControlName="libraryEmail">
+                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryEmail')?.invalid && onBoardingform.get('libraryEmail')?.touched">
+                    Invalid Email ID
+                  </mat-error>
+                </mat-form-field>
+              </div>
+  
+              <div class="col-12 col-md-6 ">
+                <mat-form-field class="w-100 " >
+                  <mat-label>Library Student Capacity</mat-label>
+                  <input matInput formControlName="libraryStudentCapacity">
+                  <mat-error class="ml-n-20"  *ngIf="onBoardingform.get('libraryStudentCapacity')?.invalid && onBoardingform.get('libraryStudentCapacity')?.touched">
+                    Invalid Student Capacity
+                  </mat-error>
+                </mat-form-field>
+              </div>
+         
+              <div class="col-12 col-md-6">
+                <mat-form-field class="w-100 " >
+                  <mat-label>Library Address</mat-label>
+                  <input matInput formControlName="libraryAddress">
+                  <mat-error  class="ml-n-20" *ngIf="onBoardingform.get('libraryAddress')?.invalid && onBoardingform.get('libraryAddress')?.touched">
+                    Library Address is required
+                  </mat-error>
+                </mat-form-field>
+              </div>  
+              <div class="col-12 col-md-6">
+                <mat-form-field class="w-100 " >
+                  <mat-label>Your UPI Id</mat-label>
+                  <input matInput formControlName="upiId">
+                  <mat-error  class="ml-n-20" *ngIf="onBoardingform.get('upiId')?.invalid && onBoardingform.get('upiId')?.touched">
+                   upi id is required
+                  </mat-error>
+                </mat-form-field>
+              </div>  
+              <div class="col-12 col-md-6">
+                <div style="text-align: left;" *ngIf="!imageUploaded" >
+                  <input type="file" #logo accept="image/*" hidden (change)="onImageUpload($event)">
+                  <button  class="upload-button"  [disabled]="appName==''" type="button" mat-icon-button (click)="logo.click()">
+                    <mat-icon>cloud_upload</mat-icon>
+                  </button>
+                  <span class="icon-text">Upload your logo</span>
+                </div>
+                <div  *ngIf="imageUploaded" >
+                  <div class="image-preview "  style="margin: auto;">
+                    <img [src]="previewImage" alt="Preview Image">
+                  </div>
+                  <span class="img-clear"><mat-icon (click)="removeImage()"> clear</mat-icon></span>
+                  <div style="margin-top: -25px;">{{logoName}}</div>
+                </div>
+              </div>   
+              <div class="col-12 col-md-6">
+                <div style="text-align: left;" *ngIf="!qrUploaded" >
+                  <input type="file" #qrcode accept="image/*" hidden (change)="onQrload($event)">
+                  <button  class="upload-button" [disabled]="appName==''" type="button" mat-icon-button (click)="qrcode.click()">
+                    <mat-icon>cloud_upload</mat-icon>
+                  </button>
+                  <span class="icon-text">Upload your Qr Code</span>
+                </div>
+                <div  *ngIf="qrUploaded" >
+                  <div class="image-preview "  style="margin: auto;">
+                    <img [src]="previewQrCode" alt="Preview Image">
+                  </div>
+                  <span class="img-clear"><mat-icon (click)="removeQr()"> clear</mat-icon></span>
+                  <div style="margin-top: -25px;">{{qrcodeName}}</div>
+                </div>
+              </div> 
+  
+              <button class="w-100 mb-3 mt-2" mat-fab extended color="primary" type="submit">Submit</button>
+            </div>
+          </form>
+        </mat-card>
+      </div>
+    </div>
+   
+  </div>
+  
+  

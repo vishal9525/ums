@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class AdminServices {
-  optionsStatusListener = new Subject<any>();
-
   constructor(private http:HttpClient){}
+  adminId=null;
   serviceoptions = {
     userServices: [
       {
@@ -58,29 +56,25 @@ export class AdminServices {
       {
         id: 1,
         show: true,
-        name: 'Admin Portal',
-        iconName: 'toggle_on',
-        routerLink: 'admin-portal',
-      },
-      {
-        id: 2,
-        show: true,
-        name: 'Add User',
+        name: 'Add Service',
         iconName: 'corporate_fare',
-        routerLink: 'add-user',
+        routerLink: 'add-service',
       },
     ],
   };
   getServices() {
     return this.serviceoptions;
   }
-  submitServiceOptions(data: any) {
-    this.optionsStatusListener.next(data);
-  }
-  getOptionsStatusListener() {
-    return this.optionsStatusListener.asObservable();
+  fetchAdminId(adminId:any){
+   this.adminId=adminId;
   }
   createAdmin(req:any){
     return this.http.post('http://localhost:3000/admin',req)
+  }
+  getSingleAdminDetail(){
+    return this.http.get<any>(`http://localhost:3000/admin/${this.adminId}`)
+  }
+  getAllAppDetails(){
+    return this.http.get<any[]>('http://localhost:3000/admin')
   }
 }

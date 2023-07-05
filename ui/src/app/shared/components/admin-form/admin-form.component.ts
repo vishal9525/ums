@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminServices } from 'src/app/core/services/admin.services';
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 
 @Component({
-  selector: 'app-onboarding-form',
-  templateUrl: './onboarding-form.component.html',
-  styleUrls: ['./onboarding-form.component.css']
+  selector: 'app-admin-form',
+  templateUrl: './admin-form.component.html',
+  styleUrls: ['./admin-form.component.css']
 })
-export class OnboardingFormComponent implements OnInit {
+export class AdminFormComponent implements OnInit {
+@Input() formDetails:any;
+
   onBoardingform: any = null;
   appUrl: string = '';
   appName: any = '';
@@ -33,8 +35,9 @@ export class OnboardingFormComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-  }
-
+    if(this.formDetails && this.formDetails?.showEditButton)
+    this.prepopulateFormValue();
+    }
   onLibraryInput() {
     this.appUrl = this.separateWord(this.onBoardingform.get('libraryName').value)
   }
@@ -129,6 +132,27 @@ export class OnboardingFormComponent implements OnInit {
       upiId: ['', Validators.required],
       libraryStudentCapacity: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
     });
+  }
+  prepopulateFormValue(){
+    this.adminservice.getSingleAdminDetail().subscribe(res=>{
+      const formValue=res;
+      console.log("formvalue==",formValue)
+      if(formValue && formValue.jsonBody){
+        const initialValues = {
+          ownerName: 'test user',
+          ownerContactNo: '8798778776',
+          ownerEmail: 'xyz@gmail.com',
+          libraryName: 'vuyfyf',
+          libraryContactNo: 'gold',
+          libraryEmail: 'my joining reason',
+          libraryAddress: 'xyz,544,maharashtra',
+          upiId: '89956767@upi',
+          libraryStudentCapacity: '567'
+        };
+        this.onBoardingform.setValue(initialValues);
+        this.onBoardingform.disable();
+      }
+    })
   }
 
   onSubmit() {

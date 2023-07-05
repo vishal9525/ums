@@ -2,7 +2,7 @@
     <div class="profile-card">
         <div class="hello"><span class="hello-text">Hello</span> </div>
         <div class="name">
-            <mat-icon class="material-icons person-icon ">person_pin</mat-icon>{{user_name}}
+            <mat-icon class="material-icons person-icon ">person_pin</mat-icon>{{userDetails?.ownerName}}
         </div>
         <div class="info"><span class="info-text">view info</span>
             <span routerLink="/">
@@ -23,8 +23,7 @@
         <mat-icon class="material-icons-outlined">{{option.iconName}}</mat-icon>
         {{option.name}}
     </a>
-    <a mat-list-item routerLinkActive="list-item-active" (click)="onClose()" target="_blank" class="notActiveNav"
-        [routerLink]="['/form','fb-test-form']">
+    <a mat-list-item routerLinkActive="list-item-active" (click)="onClose()" [routerLink]="['/form','fb-test-form']">
         <mat-icon class="material-icons-outlined">preview</mat-icon>
         My Account
     </a>

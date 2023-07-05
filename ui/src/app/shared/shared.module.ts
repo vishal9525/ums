@@ -10,6 +10,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { BreadcrumbsNavComponent } from './components/breadcrumbs-nav/breadcrumbs-nav.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { AdminFormComponent } from './components/admin-form/admin-form.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { PaymentComponent } from './components/payment/payment.component';
        SidebarComponent,
        DialogComponent,
        BreadcrumbsNavComponent,
-       PaymentComponent
+       PaymentComponent,
+       AdminFormComponent,
+       UserFormComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +40,8 @@ import { PaymentComponent } from './components/payment/payment.component';
     HttpClientModule,
     MaterialModule,
     HeaderComponent,
+    AdminFormComponent,
+    UserFormComponent,
     FooterComponent,
     SidebarComponent,
     BreadcrumbsNavComponent

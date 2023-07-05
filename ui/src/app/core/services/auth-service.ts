@@ -1,24 +1,21 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import jwt_decode from 'jwt-decode';
+
 import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  
-  constructor(private http: HttpClient) {}
-  API = environment.apiUrl;
 
-  /*   public isAuthenticated(): boolean {
-    let token = localStorage.getItem("token");
-    if (token) return !this.tokenExpired(token);
-    else return false;
-  }
- */
+  constructor(private http: HttpClient) { }
+  API = environment.apiUrl;
+  tokenDetails: any;
+
   public isAuthenticated(): boolean {
     let token = localStorage.getItem("token");
-    /*     if (token) return !this.tokenExpired(token); */
+    if (token) return !this.tokenExpired(token);
     if (token) return true;
     else return false;
   }
@@ -27,57 +24,74 @@ export class AuthService {
     const expiry = JSON.parse(atob(token.split(".")[1])).exp;
     return Math.floor(new Date().getTime() / 1000) >= expiry;
   }
-
-  /*   authenticateUser(email: any, password: any) {
-    let user = {
-      email: email,
-      password: password,
-    };
-    return this.http.post(`${this.API}/userDetails/login`, user);
-  } */
-
-  getAppName(){
-    let appName:any=localStorage.getItem("appName");
-    return appName;
-  }
-  saveUserData(user: any) {
-    return this.http.post(`${this.API}/userDetails/createUser`, user);
-  }
-
-  submitUserMember(members: any) {
-    return this.http.post(`${this.API}/members/addMembers`, members, {
-      responseType: "text",
-    });
-  }
   authenticateUser(username: any, password: any) {
     let user = {
       userName: username,
       password: password,
     };
-    return this.http.post('http://localhost:3000/auth/login',user)
+    return this.http.post('http://localhost:3000/auth/login', user)
   }
-  getAppNameList(){
-   let appNameArray=['my-app','my-library','awsome-library','gold-gym']
-   return appNameArray;
-   }
-
-  getUserDetails() {
-    return this.http.get(
-      `https://run.mocky.io/v3/1c88acf3-243b-4c65-beb1-0114f9046fff`
-    );
+  getAppNameList() {
+    let appNameArray = ['my-app', 'my-library', 'awsome-library', 'gold-gym']
+    return appNameArray;
   }
 
-  /*  getUserDetails() {
-    return this.http.get(`${this.API}/userDetails/${this.getUserID()}`);
-  } */
-
-  getAllUsers() {
-    return this.http.get(`${this.API}/userDetails`);
+  getAdminDetails(adminId: any) {
+    return this.http.get(`http://localhost:3000/admin/${adminId}`);
   }
 
-  getDesignations() {
-    return this.http.get(`${this.API}/designations`);
+  getShortName(customerName: any) {
+    let size = customerName.split(" ").length;
+    let shortName;
+    if (size === 1) {
+      shortName = customerName.slice(0, 2);
+    } else if (size === 2) {
+      shortName =
+        customerName.split(" ")[0].slice(0, 1) +
+        customerName.split(" ")[1].slice(0, 1);
+    } else {
+      shortName =
+        customerName.split(" ")[0].slice(0, 1) +
+        customerName.split(" ")[2].slice(0, 1);
+    }
+    return shortName;
   }
+  getAppName() {
+    const token: any = localStorage.getItem("token");
+    if (token) {
+      this.tokenDetails = jwt_decode(token);
+      let appName = this.tokenDetails.appName;
+      return appName;
+    } else {
+      return null
+    }
+  }
+  getUserRole() {
+    return this.tokenDetails.role;
+  }
+  getUserID() {
+    return localStorage.getItem("userId");
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   getPeople() {
     return this.http.get(`${this.API}/members/status/${this.getUserID()}`);
@@ -124,31 +138,5 @@ export class AuthService {
       responseType: "text",
     });
   }
-  getShortName(customerName: any) {
-    let size = customerName.split(" ").length;
-    let shortName;
-    if (size === 1) {
-      shortName = customerName.slice(0, 2);
-    } else if (size === 2) {
-      shortName =
-        customerName.split(" ")[0].slice(0, 1) +
-        customerName.split(" ")[1].slice(0, 1);
-    } else {
-      shortName =
-        customerName.split(" ")[0].slice(0, 1) +
-        customerName.split(" ")[2].slice(0, 1);
-    }
-    return shortName;
-  }
-  getUserRole() {
-    return localStorage.getItem("role");
-  }
 
-  getUserID() {
-    return localStorage.getItem("user_id");
-  }
-
-  getUserName() {
-    return localStorage.getItem("user_name");
-  }
 }

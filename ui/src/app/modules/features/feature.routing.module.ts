@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "src/app/core/guards/auth-guard";
 import { AddUserComponent } from "./admin-services/add-user/add-user.component";
+import { AdminDetailsComponent } from "./admin-services/admin-details/admin-details.component";
 import { DashboardComponent } from "./admin-services/dashboard/dashboard.component";
 import { PaymentHistoryComponent } from "./admin-services/payment-history/payment-history.component";
 import { SubscriptionComponent } from "./admin-services/subscription/subscription.component";
@@ -31,6 +32,11 @@ const routes: Routes = [
       {
         path: "user-details",
         component: UserDetailsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "admin-details",
+        component: AdminDetailsComponent,
         canActivate: [AuthGuard],
       },
       {

@@ -14,6 +14,7 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptor } from './core/interceptors/interceptors/http-interceptor';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
 
@@ -32,6 +33,12 @@ import { environment } from 'src/environments/environment';
     UserServiceModule,
     HomeModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      progressBar:true,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    }),
     SharedModule
   ],
   providers: [   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

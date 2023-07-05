@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/core/services/auth-service";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-login",
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   passwordFormControl = new FormControl("", [Validators.required]);
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -22,7 +24,6 @@ export class LoginComponent implements OnInit {
     }
   }
   onSubmit() {
-
     this.authService
       .authenticateUser(
         this.usernameFormControl.value,
@@ -30,21 +31,14 @@ export class LoginComponent implements OnInit {
       ).subscribe(response => {
           var authData: any = response;
           console.log(authData)
-          return
           if (authData["status"] === "success") {
-            localStorage.setItem("user_id", authData["user_id"]);
+            localStorage.setItem("adminId", authData["adminId"]);
             localStorage.setItem("token", authData["token"]);
-            localStorage.setItem("role", authData["role"]);
-            localStorage.setItem("appName", 'my-app');
             window.location.reload()
-            this.router.navigate([`/${this.authService.getAppName()}`]);
           } else {
-           /*  this.toastr.error(authData["message"], "Login Failed", {
-              timeout: 5000,
-              position: SnotifyPosition.rightTop,
-            }); */
+           this.toastr.error(authData["message"], "Login Failed"); 
           }
         }
-      );
+      ); 
   }
 }

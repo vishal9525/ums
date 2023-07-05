@@ -20,7 +20,7 @@ module.exports.loginFailureResponse= function(body){
 module.exports.loginSuccessResponse= function(body,token){
     return{
         status:"success",
-        userId:body.authId,
+        adminId:body.adminId,
         token:token,
         expiresIn:3600
     }

@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { AdminServices } from 'src/app/core/services/admin.services';
 import { AuthService } from 'src/app/core/services/auth-service';
@@ -11,15 +11,16 @@ import { AuthService } from 'src/app/core/services/auth-service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements AfterViewInit {
-  breadcrumbs:any=[
+export class DashboardComponent implements OnInit, AfterViewInit {
+  linkType:string='user-details'
+  breadcrumbs: any = [
     {
       name: 'Dashboard',
       routerLink: '',
-      active:false
+      active: false
     }
- ] 
-   names = [
+  ]
+  names = [
     'John Doe',
     'Jane Smith',
     'Michael Johnson',
@@ -41,35 +42,56 @@ export class DashboardComponent implements AfterViewInit {
     'Andrew Clark',
     'Ella Rodriguez'
   ];
-  
-   statuses = ['Active', 'Registered', 'Pending', 'Deactivated'];
-  
-   dataArray:any[] = [];
 
-  
-  displayedColumns: string[] = [ 'name',  'status','date'];
+  statuses = ['Active', 'Registered', 'Pending', 'Deactivated'];
+
+  dataArray: any[] = [];
+
+
+  displayedColumns: string[] = ['name', 'status', 'date'];
   dataSource: MatTableDataSource<any>;
-  appName:string='';
+  appName: string = '';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  
-  constructor(private authService: AuthService,private route: ActivatedRoute) {
+
+  constructor(private authService: AuthService, private route: ActivatedRoute, private adminService: AdminServices) {
     this.appName = this.authService.getAppName();
-  for (let i = 0; i < 20; i++) {
-    const obj:any = {
-      name: this.names[Math.floor(Math.random() * this.names.length)],
-      status: this.statuses[Math.floor(Math.random() * this.statuses.length)],
-      date: new Date(Math.random() * (new Date().getTime() - 0) + 0).toISOString()
-    };
-    this.dataArray.push(obj);
-  }
+    for (let i = 0; i < 20; i++) {
+      const obj: any = {
+        name: this.names[Math.floor(Math.random() * this.names.length)],
+        status: this.statuses[Math.floor(Math.random() * this.statuses.length)],
+        date: new Date(Math.random() * (new Date().getTime() - 0) + 0).toISOString()
+      };
+      this.dataArray.push(obj);
+    }
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.dataArray);
     if (this.isMobileScreen()) {
-      this.displayedColumns=['name','date']
+      this.displayedColumns = ['name', 'date']
       console.log('Mobile screen detected.');
     }
+  }
+  ngOnInit(): void {
+    if (this.authService.getUserRole() == 'superAdmin') {
+      this.adminService.getAllAppDetails().subscribe(res => {
+        if(res && res.length>0){
+          let admitData = res.map((obj) => {
+            return {
+              Id:obj.adminId,
+              name: obj.appName,
+              status: obj.status,
+              date: obj.createdAt
+            };
+          });
+          this.dataSource = new MatTableDataSource(admitData);
+          this.linkType='admin-details'
+        }
+      })
+     } else {
+
+    }
+
   }
 
   ngAfterViewInit() {
@@ -85,10 +107,10 @@ export class DashboardComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  getShortName(name:any){
+  getShortName(name: any) {
     return this.authService.getShortName(name)
   }
-  statusColor(stat: any){
+  statusColor(stat: any) {
     let status = stat.toLowerCase();
     let displayColor: any
     switch (status) {
@@ -98,12 +120,12 @@ export class DashboardComponent implements AfterViewInit {
       case 'registered':
         displayColor = 'status-gray'
         break;
-        case 'deactivated':
-          displayColor = 'status-red'
-          break;
-          case 'pending':
-            displayColor = 'status-orange'
-            break;
+      case 'deactivated':
+        displayColor = 'status-red'
+        break;
+      case 'pending':
+        displayColor = 'status-orange'
+        break;
       default:
         displayColor = ''
         break;
@@ -111,8 +133,15 @@ export class DashboardComponent implements AfterViewInit {
     return displayColor
   }
   isMobileScreen(): boolean {
-    const mobileScreenWidthThreshold = 768; 
+    const mobileScreenWidthThreshold = 768;
     return window.innerWidth < mobileScreenWidthThreshold;
+  }
+
+  navigateToDetailPage(id:any){
+    if (this.authService.getUserRole() == 'superAdmin') {
+       this.adminService.fetchAdminId(id);
+    }
+
   }
 
 }
