@@ -3,6 +3,7 @@ import { AuthGuard } from "src/app/core/guards/auth-guard";
 import { AddUserComponent } from "./admin-services/add-user/add-user.component";
 import { AdminDetailsComponent } from "./admin-services/admin-details/admin-details.component";
 import { DashboardComponent } from "./admin-services/dashboard/dashboard.component";
+import { MyProfileComponent } from "./admin-services/my-profile/my-profile.component";
 import { PaymentHistoryComponent } from "./admin-services/payment-history/payment-history.component";
 import { SubscriptionComponent } from "./admin-services/subscription/subscription.component";
 import { UserCardComponent } from "./admin-services/user-card/user-card.component";
@@ -37,6 +38,11 @@ const routes: Routes = [
       {
         path: "admin-details",
         component: AdminDetailsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "my-profile",
+        component: MyProfileComponent,
         canActivate: [AuthGuard],
       },
       {

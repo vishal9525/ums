@@ -20,10 +20,10 @@ export class AdminDetailsComponent {
       active:false
     }] 
 formProperties:any={
-  disable:true,
   showEditButton:true,
   showIcon:false,
-  title:'Admin Details'
+  title:'Admin Details',
+  otherForm:true,
 }
 
 }

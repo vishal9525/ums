@@ -53,13 +53,6 @@ export class AdminServices {
     ],
 
     adminServices: [
-      {
-        id: 1,
-        show: true,
-        name: 'Add Service',
-        iconName: 'corporate_fare',
-        routerLink: 'add-service',
-      },
     ],
   };
   getServices() {
@@ -76,5 +69,14 @@ export class AdminServices {
   }
   getAllAppDetails(){
     return this.http.get<any[]>('http://localhost:3000/admin')
+  }
+  updateAdminStatus(status:any){
+    let req={
+      status:status
+    }
+    return this.http.put<any>(`http://localhost:3000/admin/status/${this.adminId}`,req)
+  }
+  updateAdminDetails(req:any){
+    return this.http.put<any>(`http://localhost:3000/admin/${this.adminId}`,req)
   }
 }

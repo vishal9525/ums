@@ -6,26 +6,28 @@
             <img src="assets/images/logo.png" alt="onboarding" style="width: 150px;">
           </div> 
            <div class="text-center fs-4 m-3 mt-4">{{formDetails?.title}}<span>
-            <button class="user-edit-btn" mat-button color="primary"  *ngIf="formDetails?.showEditButton"><mat-icon>edit</mat-icon>Edit</button>
+            <button class="user-edit-btn" mat-button color="primary" (click)="onEdit()" *ngIf="viewMode">Edit Mode -></button>
+            <button class="user-edit-btn" mat-button color="primary" (click)="onView()" *ngIf="!viewMode">View Mode -></button>
            </span></div> 
-          <form [formGroup]="onBoardingform" (ngSubmit)="onSubmit()">
+          <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
             <div class="row m-2">
               <div class="col-12 col-md-6">
                 <mat-form-field class="w-100 " >
                   <mat-label>Library Name</mat-label>
                   <input matInput formControlName="libraryName" (input)="onLibraryInput()">
-                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryName')?.invalid && onBoardingform.get('libraryName')?.touched">
+                  <mat-error class="ml-n-20" *ngIf="adminForm.get('libraryName')?.invalid && adminForm.get('libraryName')?.touched">
                     Library Name is required
                   </mat-error>
                 </mat-form-field>
               </div>
               <div class="col-12 col-md-6" style="margin-top:-6px;">
-                <label for="basic-url" class="fl font-12">Your App Url</label>
+                <label for="basic-url" class="fl font-12">Your App Url <span [ngStyle]="{'color': appNameError ? 'red' : 'grey'}">*</span></label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text font-12" id="basic-addon3">https://global-ums.web.app/</span>
                   </div>
-                  <input type="text" [disabled]="formDetails?.showEditButton" class="form-control font-12" id="basic-url" [value]="appUrl" aria-describedby="basic-addon3">
+                  <input type="text" [disabled]="viewMode || !formDetails?.otherForm" class="form-control font-12" id="basic-url" [value]="appName" aria-describedby="basic-addon3" (input)="editAppName($event)">
+                  <span *ngIf="appNameError" class="app-name-error">App Name can contain only numbers, letters, and hyphens</span>
                 </div>
               </div>
     
@@ -33,7 +35,7 @@
                 <mat-form-field class="w-100" >
                   <mat-label>Owner Name</mat-label>
                   <input matInput formControlName="ownerName">
-                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerName')?.invalid && onBoardingform.get('ownerName')?.touched">
+                  <mat-error class="ml-n-20" *ngIf="adminForm.get('ownerName')?.invalid && adminForm.get('ownerName')?.touched">
                     Owner Name is required
                   </mat-error>
                 </mat-form-field>
@@ -44,7 +46,7 @@
                 <mat-form-field class="w-100" >
                   <mat-label>Owner Contact No</mat-label>
                   <input matInput formControlName="ownerContactNo">
-                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerContactNo')?.invalid && onBoardingform.get('ownerContactNo')?.touched">
+                  <mat-error class="ml-n-20" *ngIf="adminForm.get('ownerContactNo')?.invalid && adminForm.get('ownerContactNo')?.touched">
                     Owner Contact No is required
                   </mat-error>
                 </mat-form-field>
@@ -54,7 +56,7 @@
                 <mat-form-field class="w-100" > 
                   <mat-label>Owner Email ID</mat-label>
                   <input matInput formControlName="ownerEmail">
-                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('ownerEmail')?.invalid && onBoardingform.get('ownerEmail')?.touched">
+                  <mat-error class="ml-n-20" *ngIf="adminForm.get('ownerEmail')?.invalid && adminForm.get('ownerEmail')?.touched">
                     Invalid Email ID
                   </mat-error>
                 </mat-form-field>
@@ -64,7 +66,7 @@
                 <mat-form-field class="w-100 " >
                   <mat-label>Library Contact No</mat-label>
                   <input matInput formControlName="libraryContactNo">
-                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryContactNo')?.invalid && onBoardingform.get('libraryContactNo')?.touched">
+                  <mat-error class="ml-n-20" *ngIf="adminForm.get('libraryContactNo')?.invalid && adminForm.get('libraryContactNo')?.touched">
                     Library Contact No is required
                   </mat-error>
                 </mat-form-field>
@@ -75,7 +77,7 @@
                 <mat-form-field class="w-100 ">
                   <mat-label>Library Email ID</mat-label>
                   <input matInput formControlName="libraryEmail">
-                  <mat-error class="ml-n-20" *ngIf="onBoardingform.get('libraryEmail')?.invalid && onBoardingform.get('libraryEmail')?.touched">
+                  <mat-error class="ml-n-20" *ngIf="adminForm.get('libraryEmail')?.invalid && adminForm.get('libraryEmail')?.touched">
                     Invalid Email ID
                   </mat-error>
                 </mat-form-field>
@@ -85,7 +87,7 @@
                 <mat-form-field class="w-100 " >
                   <mat-label>Library Student Capacity</mat-label>
                   <input matInput formControlName="libraryStudentCapacity">
-                  <mat-error class="ml-n-20"  *ngIf="onBoardingform.get('libraryStudentCapacity')?.invalid && onBoardingform.get('libraryStudentCapacity')?.touched">
+                  <mat-error class="ml-n-20"  *ngIf="adminForm.get('libraryStudentCapacity')?.invalid && adminForm.get('libraryStudentCapacity')?.touched">
                     Invalid Student Capacity
                   </mat-error>
                 </mat-form-field>
@@ -95,7 +97,7 @@
                 <mat-form-field class="w-100 " >
                   <mat-label>Library Address</mat-label>
                   <input matInput formControlName="libraryAddress">
-                  <mat-error  class="ml-n-20" *ngIf="onBoardingform.get('libraryAddress')?.invalid && onBoardingform.get('libraryAddress')?.touched">
+                  <mat-error  class="ml-n-20" *ngIf="adminForm.get('libraryAddress')?.invalid && adminForm.get('libraryAddress')?.touched">
                     Library Address is required
                   </mat-error>
                 </mat-form-field>
@@ -104,25 +106,25 @@
                 <mat-form-field class="w-100 " >
                   <mat-label>Your UPI Id</mat-label>
                   <input matInput formControlName="upiId">
-                  <mat-error  class="ml-n-20" *ngIf="onBoardingform.get('upiId')?.invalid && onBoardingform.get('upiId')?.touched">
+                  <mat-error  class="ml-n-20" *ngIf="adminForm.get('upiId')?.invalid && adminForm.get('upiId')?.touched">
                    upi id is required
                   </mat-error>
                 </mat-form-field>
               </div>  
               <div class="col-12 col-md-6">
-                <div style="text-align: left;" *ngIf="!imageUploaded" >
-                  <input type="file" #logo accept="image/*" hidden (change)="onImageUpload($event)">
+                <div style="text-align: left;" *ngIf="!logoUploaded" >
+                  <input type="file" #logo accept="image/*" hidden (change)="onLogoUpload($event)">
                   <button  class="upload-button"  [disabled]="appName==''" type="button" mat-icon-button (click)="logo.click()">
                     <mat-icon>cloud_upload</mat-icon>
                   </button>
-                  <span class="icon-text">Upload your logo</span>
+                  <span class="icon-text">Upload your logo<span  [ngStyle]="{'color': logoDownloadUrl==null ? 'red' : 'grey'}">*</span></span>
                 </div>
-                <div  *ngIf="imageUploaded" >
+                <div  *ngIf="logoUploaded">
                   <div class="image-preview "  style="margin: auto;">
-                    <img [src]="previewImage" alt="Preview Image">
+                    <img [src]="logoDownloadUrl" alt="Preview Image">
                   </div>
-                  <span class="img-clear"><mat-icon (click)="removeImage()"> clear</mat-icon></span>
-                  <div style="margin-top: -25px;">{{logoName}}</div>
+                  <span class="img-clear" *ngIf="!viewMode"><mat-icon (click)="removeLogo()"> clear</mat-icon></span>
+                  <div style="margin-top: -25px;" [ngClass]="{'mt-1':viewMode}">{{appName+'logo'}}</div>
                 </div>
               </div>   
               <div class="col-12 col-md-6">
@@ -131,18 +133,18 @@
                   <button  class="upload-button" [disabled]="appName==''" type="button" mat-icon-button (click)="qrcode.click()">
                     <mat-icon>cloud_upload</mat-icon>
                   </button>
-                  <span class="icon-text">Upload your Qr Code</span>
+                  <span class="icon-text">Upload your Qr Code<span  [ngStyle]="{'color': qrDownloadUrl==null ? 'red' : 'grey'}">*</span></span>
                 </div>
                 <div  *ngIf="qrUploaded" >
                   <div class="image-preview "  style="margin: auto;">
-                    <img [src]="previewQrCode" alt="Preview Image">
+                    <img [src]="qrDownloadUrl" alt="Preview Image">
                   </div>
-                  <span class="img-clear"><mat-icon (click)="removeQr()"> clear</mat-icon></span>
-                  <div style="margin-top: -25px;">{{qrcodeName}}</div>
+                  <span class="img-clear" *ngIf="!viewMode"><mat-icon (click)="removeQr()"> clear</mat-icon></span>
+                  <div style="margin-top: -25px;" [ngClass]="{'mt-1':viewMode}">{{appName+'_qrcode'}}</div>
                 </div>
               </div> 
   
-              <button class="w-100 mb-3 mt-2" mat-fab extended color="primary" type="submit">Submit</button>
+              <button class="w-100 mb-3 mt-2" mat-fab extended color="primary" [disabled]="(!adminForm.valid || qrDownloadUrl==null || logoDownloadUrl==null || appName=='' || appNameError) && buttonType=='Submit'" type="submit">{{buttonType}}</button>
             </div>
           </form>
         </mat-card>

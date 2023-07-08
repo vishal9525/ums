@@ -11,6 +11,16 @@ module.exports.createAuthRequest = function (req) {
         updatedAt:new Date().getTime()
     }
 }
+module.exports.updateAuthRequest = function (id,req) {
+    return authRequest={
+        userName: req.body.appName,
+        adminId:id,
+        appName:req.body.appName,
+        mobileNo:req.body.jsonBody.libraryContactNo,
+        emailId:req.body.jsonBody.libraryEmail,
+        updatedAt:new Date().getTime()
+    }
+}
 module.exports.loginFailureResponse= function(body){
     return{
         status:"failed",

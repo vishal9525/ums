@@ -9,6 +9,7 @@ import { SubscriptionComponent } from './admin-services/subscription/subscriptio
 import { UserDetailsComponent } from './admin-services/user-details/user-details.component';
 import { UserCardComponent } from './admin-services/user-card/user-card.component';
 import { AdminDetailsComponent } from './admin-services/admin-details/admin-details.component';
+import { MyProfileComponent } from './admin-services/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AdminDetailsComponent } from './admin-services/admin-details/admin-deta
     SubscriptionComponent,
     UserDetailsComponent,
     UserCardComponent,
-    AdminDetailsComponent
+    AdminDetailsComponent,
+    MyProfileComponent
   ],
   imports: [
     SharedModule,

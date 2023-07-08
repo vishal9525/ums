@@ -41,6 +41,40 @@ module.exports.getAllAppDetails = function getAllAppDetails(req,res){
     })
 }
 
+module.exports.updateAdminDetails = function updateAdminDetails(req,res){
+    Admins.update(adminUtil.updateAdminRequest(req.params.adminId,req),{
+        where:{adminId:req.params.adminId}}).then(response=>{
+        console.log('updateAdminDetails Admins.update api call executed')
+        Auth.update(authUtil.updateAuthRequest(req.params.adminId,req),{
+            where:{adminId:req.params.adminId}}).then(function(resp){
+            console.log("updateAdminDetails Auth.update api call executed")
+            res.send(resp);
+            }).catch(function(response){
+             console.log("Error in adminController: updateAdminDetails Auth.update---",response)
+            returnError(response, res)
+            })
+       }).catch(response=>{
+        console.log("Error in adminController: updateAdminDetails Admins.update---",response)
+        returnError(response, res)
+      })
+}
+
+module.exports.updateAdminStatus = function updateAdminStatus(req,res){
+   Admins.update({status:req.body.status},{where:{adminId:req.params.adminId}}).then(response=>{
+    console.log('updateAdminStatus Admins.update api call executed')
+    Auth.update({status:req.body.status},{where:{adminId:req.params.adminId}}).then(response=>{
+        console.log('updateAdminStatus Auth.update api call executed')
+        res.send(response)
+       }).catch(response=>{
+        console.log("Error in adminController: updateAdminStatus Auth.update---",response)
+        returnError(response, res)
+      })
+   }).catch(response=>{
+    console.log("Error in adminController: updateAdminStatus Admins.update---",response)
+    returnError(response, res)
+  })
+}
+
 function returnError(response,res){
     res.status(response.status || 500 ).send({
         error:{

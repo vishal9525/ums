@@ -34,6 +34,9 @@ export class SidebarComponent implements OnInit {
     }
     this.closeSidenav.emit();
   }
+  passUserId(){
+    this.adminService.fetchAdminId(localStorage.getItem('adminId'));
+  }
   logOut() {
     localStorage.clear();
   }

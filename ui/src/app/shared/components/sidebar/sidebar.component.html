@@ -4,8 +4,8 @@
         <div class="name">
             <mat-icon class="material-icons person-icon ">person_pin</mat-icon>{{userDetails?.ownerName}}
         </div>
-        <div class="info"><span class="info-text">view info</span>
-            <span routerLink="/">
+        <div class="info"  routerLink="my-profile" (click)="passUserId()"><span class="info-text">view info</span>
+            <span>
                 <mat-icon class="material-icons-outlined setting-icon">settings</mat-icon>
             </span>
         </div>
@@ -23,18 +23,12 @@
         <mat-icon class="material-icons-outlined">{{option.iconName}}</mat-icon>
         {{option.name}}
     </a>
-    <a mat-list-item routerLinkActive="list-item-active" (click)="onClose()" [routerLink]="['/form','fb-test-form']">
+    <a mat-list-item routerLinkActive="list-item-active" (click)="onClose(); passUserId()" routerLink="my-profile">
         <mat-icon class="material-icons-outlined">preview</mat-icon>
-        My Account
+        My Profile
     </a>
     <a mat-list-item routerLinkActive="list-item-active" (click)="onClose()" routerLink="/login" (click)="logOut()">
         <mat-icon class="material-icons-outlined">rocket_launch</mat-icon>
         Logout
     </a>
-<!-- 
-    <a mat-list-item routerLinkActive="list-item-active" *ngFor="let option of activeAdminService"
-        [routerLinkActiveOptions]="{exact: true}" routerLink="{{option.routerLink}}" (click)="onClose()">
-        <mat-icon class="material-icons-outlined">{{option.iconName}}</mat-icon>
-        {{option.name}}
-    </a> -->
 </mat-nav-list>

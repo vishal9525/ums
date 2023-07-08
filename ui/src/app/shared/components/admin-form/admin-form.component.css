@@ -3,3 +3,8 @@
     position: relative;
     float: right;
 }
+.app-name-error{
+    font-size: 11px;
+    color: red;
+    text-align: left;
+}
